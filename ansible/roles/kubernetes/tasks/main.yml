@@ -1,13 +1,12 @@
 ---
 - name: Remove old docker versions
   apt:
-    name: "{{ item }}"
+    name:
+      - docker
+      - docker-engine
+      - docker.io
     state: absent
     update_cache: yes
-  with_items:
-       - docker
-       - docker-engine
-       - docker.io
 
 - name: Add apt-key for Docker
   apt_key:
@@ -31,18 +30,17 @@
 
 - name: Install list of packages for Kubernetes
   apt:
-    name: "{{ item }}"
+    name:
+      - docker-ce
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - kubelet
+      - kubeadm
+      - kubernetes-cni
     state: present
     update_cache: yes
-  with_items:
-       - docker-ce
-       - apt-transport-https
-       - ca-certificates
-       - curl
-       - software-properties-common
-       - kubelet
-       - kubeadm
-       - kubernetes-cni
 
 - name: Remove swap
   lineinfile:
