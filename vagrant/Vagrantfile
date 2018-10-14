@@ -1,0 +1,32 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "master" do |master|
+    master.vm.box = "ubuntu/bionic64"
+    master.vm.network :private_network, ip: "192.168.50.110"
+    master.vm.provision "shell", path: "provision.sh"
+    master.vm.hostname = "master"
+
+    master.vm.provision "ansible" do |ansible|
+      ansible.playbook = "../ansible/provision.yml"
+    end
+
+    master.vm.synced_folder "./kubernetes", "/vagrant", type: "rsync", rsync__args: ["--verbose", "--archive", "--compress"]
+  end
+
+  config.vm.define "node1" do |node1|
+    node1.vm.box = "ubuntu/bionic64"
+    node1.vm.network :private_network, ip: "192.168.50.111"
+    node1.vm.provision "shell", path: "provision.sh"
+    node1.vm.hostname = "node1"
+
+    node1.vm.provision "ansible" do |ansible|
+      ansible.playbook = "../ansible/provision.yml"
+    end
+  end
+
+  # config.vm.define "node2" do |node2|
+  #   node2.vm.box = "ubuntu/bionic64"
+  #   node2.vm.network :private_network, ip: "192.168.50.112"
+  #   node2.vm.provision "shell", path: "provision.sh"
+  #   node2.vm.hostname = "node2"
+  # end
+end
