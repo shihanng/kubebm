@@ -15,7 +15,7 @@ popd
 
 3. SSH into the master node and setup Kubernetes master.
 ```
-$ sudo kubeadm init
+$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=<IP-ADDRESS>
 ```
 
 4. Use the `/etc/kubernetes/admin.conf` from the master to use it as the
@@ -28,7 +28,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 6. Install networking.
 ```
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/bc79dd1505b0c8681ece4de4c0d86c5cd2643275/Documentation/kube-flannel.yml
 ```
 
 7. When we have more machines to join the the cluster, we can generate the join
