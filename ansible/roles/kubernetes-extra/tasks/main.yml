@@ -1,0 +1,8 @@
+---
+- name: Insert node-ip
+  lineinfile:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    line: "Environment=\"KUBELET_EXTRA_ARGS=--node-ip={{ ansible_enp0s8.ipv4.address }}\""
+    insertafter: '^Environment="KUBELET_CONFIG_ARGS='
+  notify:
+    - Restart kubelet

@@ -9,6 +9,10 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "../ansible/provision.yml"
     end
 
+    master.vm.provision "ansible" do |ansible|
+      ansible.playbook = "../ansible/provision-extra.yml"
+    end
+
     master.vm.synced_folder "./kubernetes", "/vagrant", type: "rsync", rsync__args: ["--verbose", "--archive", "--compress"]
   end
 
@@ -20,6 +24,10 @@ Vagrant.configure("2") do |config|
 
     node1.vm.provision "ansible" do |ansible|
       ansible.playbook = "../ansible/provision.yml"
+    end
+
+    node1.vm.provision "ansible" do |ansible|
+      ansible.playbook = "../ansible/provision-extra.yml"
     end
   end
 
