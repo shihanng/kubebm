@@ -6,3 +6,8 @@
     insertafter: '^Environment="KUBELET_CONFIG_ARGS='
   notify:
     - Restart kubelet
+
+- name: Insert hostname
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ ansible_enp0s8.ipv4.address }} {{ ansible_hostname }}"
