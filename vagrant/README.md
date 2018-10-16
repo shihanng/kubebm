@@ -20,8 +20,3 @@ $ sudo chown $(id -u):$(id -g) /vagrant/config
 ```
 vagrant rsync-back
 ```
-
-4. https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/#pod-network
-```
-sudo sysctl net.bridge.bridge-nf-call-iptables=1
-```
