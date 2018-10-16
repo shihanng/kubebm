@@ -11,7 +11,7 @@ vagrant up
 2. SSH into the master node and setup Kubernetes master.
 ```
 vagrant ssh master
-$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.50.110
+$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --service-cidr=10.244.0.0/16 --apiserver-advertise-address=192.168.50.110
 $ sudo cp -i /etc/kubernetes/admin.conf /vagrant/config
 $ sudo chown $(id -u):$(id -g) /vagrant/config
 ```
