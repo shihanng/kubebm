@@ -1,9 +1,0 @@
-[nodes]
-192.168.0.106
-
-[vagrant]
-192.168.50.110
-
-[vagrant:vars]
-ansible_user=vagrant
-ansible_ssh_pass=vagrant
